@@ -1,0 +1,8 @@
+node_modules
+package-lock*
+.terraform
+.terraform*
+*tfstate*
+.history
+/imgs
+README.md
