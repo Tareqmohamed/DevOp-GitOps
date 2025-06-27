@@ -50,6 +50,7 @@ pipeline {
         git config user.email "telmagic10@gmail.com"
         git add k8s/app.yml
         git commit -m "Update image tag to ${IMAGE_TAG} [ci skip]" || echo "No changes"
+        git checkout main
         git push
     """
 }
