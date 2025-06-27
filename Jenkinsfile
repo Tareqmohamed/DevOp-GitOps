@@ -1,5 +1,5 @@
 pipeline {
-    agent {tarek-agent}
+    agent nodesByLabel(label: 'tarek-agent')
 
     environment {
         DOCKER_IMAGE = 'tareqmohamed/posts_proj'
