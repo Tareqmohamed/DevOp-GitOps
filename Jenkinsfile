@@ -43,13 +43,18 @@ pipeline {
         }
         stage('Commit and Push Changes') {
             steps {
-                    sh """
-                git config user.email "telmagic10@gmail.com"
-                git config user.name "tarek mohamed"
-                git add k8s/app.yml
-                git commit -m "Update image tag to ${IMAGE_TAG} [ci skip]" 
-                git push origin main
-                    """
+                    withCredentials([usernamePassword(credentialsId: '1', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
+            sh """
+        git remote set-url origin https://${GIT_USER}:${GIT_TOKEN}@github.com/Tareqmohamed/DevOp-GitOps.git
+        git checkout main
+        git config user.name "tarek mohamed"
+        git config user.email "telmagic10@gmail.com"
+        git add k8s/app.yml
+        git commit -m "Update image tag to ${NEW_TAG} [ci skip]" || echo "No changes"
+        git push origin main
+    """
+}
+
             }
         }
     }
