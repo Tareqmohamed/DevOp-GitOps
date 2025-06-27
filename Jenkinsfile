@@ -48,7 +48,6 @@ pipeline {
                         git commit -m "Update image tag to ${IMAGE_TAG} [ci skip]" || echo "No changes to commit"
                         git push 
                     """
-                }
             }
         }
     }
