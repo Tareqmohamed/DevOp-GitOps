@@ -52,9 +52,10 @@ pipeline {
             sh """
         git config user.name "tarek mohamed"
         git config user.email "telmagic10@gmail.com"
+        git pull --rebase origin main || true
         git add k8s/app.yml
         git commit -m "Update image tag to ${IMAGE_TAG} [ci skip]" || echo "No changes"
-        git push
+        git push origin main
     """
 }
 
