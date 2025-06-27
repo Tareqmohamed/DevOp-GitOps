@@ -10,10 +10,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-                withCredentials([gitUsernamePassword(credentialsId: '1',
-                gitToolName: 'git-tool')]) {
-                    sh "git checkout main"
-                }
             }
         }
 
@@ -37,6 +33,18 @@ pipeline {
             }
         }
 
+        stage('Prepare Git Repo') {
+            steps {
+                withCredentials([gitUsernamePassword(credentialsId: '1', gitToolName: 'git-tool')]) {
+                    sh """
+                        git config user.name "tarek mohamed"
+                        git config user.email "telmagic10@gmail.com"
+                        git checkout main
+                        git pull --rebase origin main
+                    """
+                }
+            }
+        }
         stage('Run ansible to update tag in k8s file') {
           steps {
                 sh """
@@ -50,9 +58,6 @@ pipeline {
                     withCredentials([gitUsernamePassword(credentialsId: '1',
                  gitToolName: 'git-tool')]) {
             sh """
-        git config user.name "tarek mohamed"
-        git config user.email "telmagic10@gmail.com"
-        git pull --rebase origin main || true
         git add k8s/app.yml
         git commit -m "Update image tag to ${IMAGE_TAG} [ci skip]" || echo "No changes"
         git push origin main
