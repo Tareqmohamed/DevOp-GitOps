@@ -43,7 +43,6 @@ pipeline {
         }
         stage('Commit and Push Changes') {
             steps {
-                sshagent (credentials: ['1']) {
                     sh """
                         git add .
                         git commit -m "Update image tag to ${IMAGE_TAG} [ci skip]" || echo "No changes to commit"
