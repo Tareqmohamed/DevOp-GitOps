@@ -43,10 +43,9 @@ pipeline {
         }
         stage('Commit and Push Changes') {
             steps {
-                    withCredentials([usernamePassword(credentialsId: '1', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
+                    withCredentials([gitUsernamePassword(credentialsId: '1',
+                 gitToolName: 'git-tool')]) {
             sh """
-        git remote set-url origin https://${GIT_USER}:${GIT_TOKEN}@github.com/Tareqmohamed/DevOp-GitOps.git
-        git checkout main
         git config user.name "tarek mohamed"
         git config user.email "telmagic10@gmail.com"
         git add k8s/app.yml
