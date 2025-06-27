@@ -47,7 +47,7 @@ pipeline {
                        git checkout main
 
                 git add k8s/app.yml
-                git commit -m "Update image tag to ${NEW_TAG} [ci skip]" || echo "No changes to commit"
+                git commit -m "Update image tag to ${IMAGE_TAG} [ci skip]" || echo "No changes to commit"
                 git push origin main
                     """
             }
