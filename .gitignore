@@ -5,5 +5,4 @@ package-lock*
 *tfstate*
 .history
 /imgs
-README.md
 .dockerignore
