@@ -6,3 +6,4 @@ package-lock*
 .history
 /imgs
 README.md
+.dockerignore
