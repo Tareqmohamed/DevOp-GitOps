@@ -45,6 +45,8 @@ pipeline {
             steps {
                     sh """
                        git checkout main
+                git config user.email "telmagic10@gmail.com"
+                git config user.name "tarek mohamed"
 
                 git add k8s/app.yml
                 git commit -m "Update image tag to ${IMAGE_TAG} [ci skip]" || echo "No changes to commit"
