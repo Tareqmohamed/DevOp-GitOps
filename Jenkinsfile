@@ -44,9 +44,11 @@ pipeline {
         stage('Commit and Push Changes') {
             steps {
                     sh """
-                        git add .
-                        git commit -m "Update image tag to ${IMAGE_TAG} [ci skip]" || echo "No changes to commit"
-                        git push 
+                       git checkout main
+
+                git add k8s/app.yml
+                git commit -m "Update image tag to ${NEW_TAG} [ci skip]" || echo "No changes to commit"
+                git push origin main
                     """
             }
         }
